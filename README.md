@@ -1,27 +1,50 @@
-# AngularRouting
+Angular Routing And Navigation
+=====
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.9.
+Steps :
 
-## Development server
+1) Add following code under index.html
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+<base href="/">
+```
 
-## Code scaffolding
+2) Add component in the app.module.ts
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+@NgModule({
+  declarations: [
+    AppComponent,
+    DepartmentListComponent,
+    EmployeeListComponent,
+    PageNotFoundComponent
+  ],
+  
+ ```
+ 3) Add Routing path in app-routing.module.ts
+ 
+ ```
+const routes: Routes = [
+  { path: '', redirectTo: '/departments', pathMatch: 'full' },  // default route to department path
+  { path: 'departments', component: DepartmentListComponent }, 
+  { path: 'employees', component: EmployeeListComponent },
+  { path: "**", component: PageNotFoundComponent }, // any invalid path
+];
 
-## Build
+```
+ 
+ 4) Create navigation button and tell them what path to redirect in app.component.html 
+ 
+```
+ <nav>
+  <button routerLink="/departments">Departments</button><br>
+  <button routerLink="/employees">Employees</button>
+</nav>
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+5) Add router-outlet sector so it can show routed html
+  ```
+<router-outlet></router-outlet>
+<!-- Routed View goes here -->
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ ```
